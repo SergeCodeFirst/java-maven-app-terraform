@@ -10,6 +10,9 @@ def gv
 
 pipeline {
     agent any
+    environment {
+        IMAGE_NAME = "sergevismok/demo-app:jma-3.0"
+    }
     tools {
         maven 'maven-3.9'
     }
@@ -31,9 +34,9 @@ pipeline {
         stage ("build and push image stage") {
             steps {
                 script {
-                    dockerBuildImage "sergevismok/demo-app:jma-3.0"
+                    dockerBuildImage(env.IMAGE_NAME)
                     dockerLogin()
-                    dockerPush "sergevismok/demo-app:jma-3.0"
+                    dockerPush(env.IMAGE_NAME)
                 }
             }
         }
