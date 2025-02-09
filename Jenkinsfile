@@ -67,12 +67,12 @@ pipeline {
             steps {
                 script {
                     echo "waiting for EC2 server to initialize"
-                    sleep(time: 90, unit: "SECONDS")
+                    sleep(time: 130, unit: "SECONDS")
 
                     echo 'deploying docker image to EC2...'
                     echo "ec2 public IP: ${EC2_PUBLIC_IP}"
 
-                    def shellCmd = "bash ./server-cmds.sh ${IMAGE_NAME} ${DOCKER_CREDS_USER} ${DOCKER_CREDS_PSW}"
+                    def shellCmd = "bash ./server-cmds.sh ${IMAGE_NAME} ${DOCKER_CREDS_USR} ${DOCKER_CREDS_PSW}"
                     def ec2Instance = "ec2-user@${EC2_PUBLIC_IP}"
 
                     sshagent(['server-ssh-key']) {
