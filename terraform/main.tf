@@ -1,6 +1,17 @@
 # Run this command before running terreform apply if you are using and M1 mac 
 # export GODEBUG=asyncpreemptoff=1;
 
+terraform {
+    required_version = ">= 0.12"
+    backend "s3" {
+        bucket = "myapp-s3-bucket-java-maven-app-terraform"
+        key = "myapp/state.tfstate"
+        region = "us-east-1"
+    }
+    
+}
+
+
 provider "aws" {
     region = var.region
 }
